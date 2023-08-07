@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Form validation</title>
+    <style>
+        body {
+            text-align: center;
+            
+        }
+        button{
+            background-color: antiquewhite;
+            color: black;
+            width: 150px;
+            height: 50px;
+        }
+        #inputField {
+            width: 200px;
+            height: 50px;
+            background-color: antiquewhite;
+        }
+        p{
+            font-size: 20px;
+            font-weight: bold;
+           
+        }
+        #show{
+           
+            background-color: antiquewhite;
+        }
+
+    </style>
+</head>
+
+<body>
+    <p>Enter the Value:</p>
+    <br>
+    <form name="form1" action="#">
+        <input type="text" name="text1" id="inputField" />
+        <br/>
+    <br><br>  
+    </form>
+
+    <button onclick="emailValidate()">
+        Email Validation
+    </button>
+    <button onclick="textLength()">
+        Text Length
+    </button>
+    <button onclick="countWords()">
+        Words Count
+    </button>
+    <button onclick="LowerCase()">
+        LowerCase
+    </button>
+    <br><br>
+    <button onclick="UpperCase()">
+        UpperCase
+    </button>
+    <button onclick="sentenceCase()">
+        Sentence Case
+    </button>
+    
+    <button onclick="reverse()">
+        Reverse
+    </button>
+    <button onclick="jsalert()">
+        Js Alert
+    </button>
+    <br><br>
+    <textarea  id="show" cols="25" rows="10">Output</textarea>
+
+    <script>
+
+        function countWords() {
+        	var text = document.getElementById("inputField").value;
+        	var numWords = 0;
+        	for (var i = 0; i < text.length; i++) {
+        		var currentCharacter = text[i];
+        		if (currentCharacter == " ") {
+        			numWords += 1;
+        		}
+        	}
+        	numWords += 1;
+        	document.getElementById("show").innerHTML = numWords;
+        }
+        function textLength() {
+        	var text = document.getElementById("inputField").value;
+        	document.getElementById("show").innerHTML = text.length;
+        }	
+        function LowerCase() {
+        	var text = document.getElementById("inputField").value;
+        	document.getElementById("show").innerHTML = text.toLowerCase();
+        }
+        function UpperCase() {
+        	var text = document.getElementById("inputField").value;
+        	document.getElementById("show").innerHTML = text.toUpperCase();
+        }
+        function reverse() {
+        	var text = document.getElementById("inputField").value;
+            var reversedStr = [...text].reverse().join("");
+        	document.getElementById("show").innerHTML = reversedStr;
+        }
+        function jsalert(){
+            var text = document.getElementById("inputField").value;
+             window.alert(text);
+        }
+        function sentenceCase(){
+            var text = document.getElementById("inputField").value;
+            var titleCase = "";
+            text.split(" ").forEach(word => {
+            var capitalizedWord = word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+            titleCase += capitalizedWord + " ";
+            });
+            document.getElementById("show").innerHTML = titleCase;
+           
+        }
+        function emailValidate(){
+            var text=document.getElementById("inputField").value;
+            var valid = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+            if (text.match(valid))
+            {
+                document.getElementById("show").innerHTML = "valid"; 
+            }else{
+                document.getElementById("show").innerHTML = "invalid";
+            }
+            
+        }
+    </script>
+</body>
+</html>

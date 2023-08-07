@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Document</title>
+    <style>
+       body {
+        font-family: Arial;
+        padding: 10px;
+        background: #f1f1f1;
+    } 
+    .header {
+        padding: 30px;
+        text-align: center;
+        background: white;
+        background-color: aliceblue;
+        opacity: 0.5;
+    }
+    .header h1 {
+        font-size: 50px;
+    }
+    .topnav {
+        overflow: hidden;
+        background-color: hsl(0, 38%, 92%);
+    }
+    .topnav a {
+        float: left;
+        display: block;
+        color: hsl(0, 2%, 8%);
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+    .topnav a:hover {
+        background-color: hwb(0 38% 6%);
+        color: hsl(250, 75%, 3%);
+    }
+    .leftcolumn {   
+        float: left;
+        width: 70%;
+    }
+    .rightcolumn {
+        float: left;
+        width: 28%;
+        background-color: #f1f1f1;
+        padding-left: 20px;
+    }
+    .fakeimg {
+        background-color: #aaa;
+        width: 100%;
+        
+    }
+    .card {
+        background-color:white;
+        padding: 20px;
+        margin-top: 20px;
+    }
+    .row::after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+    .footer {
+        padding: 20px;
+        text-align: center;
+        background:hsl(0, 38%, 92%);
+        margin-top: 20px;
+    }
+
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h1>My Website</h1>
+        <p>Making this website for the practice </p>
+    </div>
+    <div class="topnav" >
+        <a href="">Home</a>
+        <a href="">About</a>
+        <a href="">Link</a>
+        <a href="">My Account</a>
+        <a href="">My Cart</a>
+        <a href="">Contact Us</a>
+        <a href="">Logout</a>
+    </div>
+    <div class="row">
+        <div class="leftcolumn">
+            <div class="card">
+                <h3>Text Heading</h3>
+                <p>Lorem ipsum dolor sit amet.</p>
+                <div class="fakeimg" style="height:200px;"><p>Image</p></div>
+                <p>Lorem, ipsum dolor.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur eaque, nemo, voluptatem minima
+                    dignissimos aperiam, rem totam delectus vel fuga neque quibusdam. Impedit maiores nemo voluptates.
+                    Unde
+                    sit quisquam id.</p>
+            </div>
+            <div class="card">
+                <h3>Text Heading</h3>
+                <p>Lorem ipsum dolor sit amet.</p>
+                <div class="fakeimg" style="height:210px;"> <p>Image</p></div>
+                <p>Lorem, ipsum dolor.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Tenetur eaque, nemo, voluptatem minima
+                    dignissimos aperiam, rem totam delectus vel fuga neque quibusdam. Impedit maiores nemo voluptates.
+                    Unde
+                    sit quisquam id.</p>
+            </div>
+        </div>
+        <div class="rightcolumn">
+            <div class="card"> 
+                <h2>Anout Me</h2>
+                <div class="fakeimg" style="height:238px;"><p>Image</p></div>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Necessitatibus ex debitis laboriosam, eius
+                    assumenda doloremque?</p>
+            </div>
+            <div class="card">
+                <h3>Popular Image </h3>
+                <div class="fakeimg" style="height: 50px;"><p>Image</p></div>
+                <div class="fakeimg" style="height: 50px;"><p>Image</p></div>
+                <div class="fakeimg" style="height: 50px;"><p>Image</p></div>
+            </div>
+            <div class="card">
+                <h2>Follow Me</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, illum.</p>
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <div class="footer">
+        <h2>Footer</h2>
+        <p>Thanks for visiting</p>
+    </div>
+</body>
+
+</html>
