@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
     <meta charset="UTF-8">
@@ -76,6 +76,8 @@
 </head>
 
 <body>
+
+
     <script>
 
         function printError(elemId, hintMsg) {
@@ -193,30 +195,34 @@
             }
             // printing the data into txt file
             if ((nameErr || emailErr || mobileErr || courseErr || genderErr || hobbiesErr || imageErr) == true) {
-                return false;
-            
-            } else {
-                var dataPreview = "You've entered the following details: \n\n " +
-                    "Full Name: " + name + "\n" +
-                    "Email Address: " + email + "\n" +
-                    "Mobile Number: " + mobile + "\n" +
-                    "Hobbies : " + hobbies + "\n" +
-                    "course: " + course + "\n" +
-                    "Gender: " + gender + "\n" +
-                    "Image Path:" + filePath + "\n";
+                return false;      
+            };        
+            // } else {
+            //     var dataPreview = "You've entered the following details: \n\n " +
+            //         "Full Name: " + name + "\n" +
+            //         "Email Address: " + email + "\n" +
+            //         "Mobile Number: " + mobile + "\n" +
+            //         "Hobbies : " + hobbies + "\n" +
+            //         "course: " + course + "\n" +
+            //         "Gender: " + gender + "\n" +
+            //         "Image Path:" + filePath + "\n";
 
-                // download the file in txt mode 
-                const link = document.createElement("a");
-                const file = new Blob([dataPreview], { type: 'text/plain' });
-                link.href = URL.createObjectURL(file);
-                link.download = "Registration_details.txt";
-                link.click();
-                URL.revokeObjectURL(link.href);
-            };
+            //     // download the file in txt mode 
+            //     const link = document.createElement("a");
+            //     const file = new Blob([dataPreview], { type: 'text/plain' });
+            //     link.href = URL.createObjectURL(file);
+            //     link.download = "Registration_details.txt";
+            //     link.click();
+            //     URL.revokeObjectURL(link.href);
+            // };
         };
 
     </script>
-    <form name="contactForm" onsubmit="return validateForm()" method="get" action="action.php" enctype="multipart/form-data">
+
+
+
+
+    <form name="contactForm" onsubmit="return validateForm()" method="post" action="insert.php" enctype="multipart/form-data">
         <h2>Registration Form</h2>
         <div class="row">
             <label>Full Name:</label>
@@ -268,7 +274,10 @@
         </div>
         <div class="row">
             <label>Image Upload:</label>
-            <input type="file" id="file" name="image" />
+            <input type="file" id="file" name="image"/>
+            <!-- for upload the multiple file in the form 
+            <input type="file" id="file" name="image[]" multiple /> -->
+
             <div class="error" id="imageErr"></div>
         </div>
 
