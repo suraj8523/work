@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
     <meta charset="UTF-8">
@@ -222,7 +222,7 @@
 
 
 
-    <form name="contactForm" onsubmit="return validateForm()" method="post" action="action.php" enctype="multipart/form-data">
+    <form name="contactForm" onsubmit="return validateForm()" method="post" action="form_valid_db.php" enctype="multipart/form-data">
         <h2>Registration Form</h2>
         <div class="row">
             <label>Full Name:</label>
