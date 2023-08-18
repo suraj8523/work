@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
     <meta charset="UTF-8">
@@ -76,6 +76,8 @@
 </head>
 
 <body>
+
+
     <script>
 
         function printError(elemId, hintMsg) {
@@ -216,7 +218,11 @@
         };
 
     </script>
-    <form name="contactForm" onsubmit="return validateForm()" method="POST" action="action.php" enctype="multipart/form-data">
+
+
+
+
+    <form name="contactForm" onsubmit="return validateForm()" method="post" action="form_valid_db.php" enctype="multipart/form-data">
         <h2>Registration Form</h2>
         <div class="row">
             <label>Full Name:</label>
@@ -268,7 +274,10 @@
         </div>
         <div class="row">
             <label>Image Upload:</label>
-            <input type="file" id="file" name="image" />
+            <input type="file" id="file" name="image"/>
+            <!-- for upload the multiple file in the form 
+            <input type="file" id="file" name="image[]" multiple /> -->
+
             <div class="error" id="imageErr"></div>
         </div>
 

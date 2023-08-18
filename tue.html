@@ -71,13 +71,15 @@
             color: white;
             font-weight: bold;
         }
+
+        
     </style>
 
 </head>
 
 <body>
-    <script>
 
+    <script>
         function printError(elemId, hintMsg) {
             document.getElementById(elemId).innerHTML = hintMsg;
         }
@@ -95,7 +97,7 @@
         // }
 
         function validateForm() {
-
+            
             var name = document.contactForm.name.value;
             var email = document.contactForm.email.value;
             var mobile = document.contactForm.mobile.value;
@@ -193,30 +195,29 @@
             }
             // printing the data into txt file
             if ((nameErr || emailErr || mobileErr || courseErr || genderErr || hobbiesErr || imageErr) == true) {
-                return false;      
-            };        
-            // } else {
-            //     var dataPreview = "You've entered the following details: \n\n " +
-            //         "Full Name: " + name + "\n" +
-            //         "Email Address: " + email + "\n" +
-            //         "Mobile Number: " + mobile + "\n" +
-            //         "Hobbies : " + hobbies + "\n" +
-            //         "course: " + course + "\n" +
-            //         "Gender: " + gender + "\n" +
-            //         "Image Path:" + filePath + "\n";
+                return false;
+            } else {
+                var dataPreview = "You've entered the following details: \n\n " +
+                    "Full Name: " + name + "\n" +
+                    "Email Address: " + email + "\n" +
+                    "Mobile Number: " + mobile + "\n" +
+                    "Hobbies : " + hobbies + "\n" +
+                    "course: " + course + "\n" +
+                    "Gender: " + gender + "\n" +
+                    "Image Path:" + filePath + "\n";
 
-            //     // download the file in txt mode 
-            //     const link = document.createElement("a");
-            //     const file = new Blob([dataPreview], { type: 'text/plain' });
-            //     link.href = URL.createObjectURL(file);
-            //     link.download = "Registration_details.txt";
-            //     link.click();
-            //     URL.revokeObjectURL(link.href);
-            // };
+                // download the file in txt mode 
+                const link = document.createElement("a");
+                const file = new Blob([dataPreview], { type: 'text/plain' });
+                link.href = URL.createObjectURL(file);
+                link.download = "Registration_details.txt";
+                link.click();
+                URL.revokeObjectURL(link.href);
+            };
         };
 
     </script>
-    <form name="contactForm" onsubmit="return validateForm()" method="POST" action="action.php" enctype="multipart/form-data">
+    <form name="contactForm" onsubmit="return validateForm()">
         <h2>Registration Form</h2>
         <div class="row">
             <label>Full Name:</label>
@@ -262,13 +263,12 @@
                 <label><input type="checkbox" name="hobbies[]" value="Gaming">Gaming</label>
                 <label><input type="checkbox" name="hobbies[]" value="Dancing">Dancing</label>
                 <label><input type="checkbox" name="hobbies[]" value="Movies">Movies</label>
-                <label><input type="checkbox" name="hobbies[]" value="Reading">Reading</label>
             </div>
             <div class="error" id="hobbiesErr"></div>
         </div>
         <div class="row">
             <label>Image Upload:</label>
-            <input type="file" id="file" name="image" />
+            <input type="file" id="file" />
             <div class="error" id="imageErr"></div>
         </div>
 
@@ -277,7 +277,5 @@
             <input type="reset" value="Reset">
         </div>
     </form>
-   
 </body>
-
 </html>

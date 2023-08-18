@@ -1,68 +1,70 @@
-<?php
-include("developers.php");
-?>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <title>Form Validation</title>
 </head>
 
 <body>
-  <br><br>
+  <?php
+  $name = $phone = $email = $addres = $dob = $comments = "";
 
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-4">
-        <h3 class="text-primary"> HTML Form to Insert Data</h3>
-        <p><?php echo !empty($result) ? $result : ''; ?></p>
-        <!--=== HTML Form==-->
-        <form method="post">
-          <div class="form-group">
-            <input type="text" class="form-control" placeholder="Full Name" name="fullName" value="<?php echo $editData['fullName'] ?? ''; ?>">
-          </div>
+  if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $name = test_input($_POST["name"]);
+    $phone = test_input($_POST["phone"]);
+    $email = test_input($_POST["email"]);
+    $address = test_input($_POST["address"]);
+    $dob = test_input($_POST["dob"]);
+    // $comments = test_input($_POST["comments"]);
+    $comments = $_POST['comments'];
+  }
+  function test_input($data)
+  {
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+  }
+  ?>
+  <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+    <label for="name"> Name</label>
+    <input type="text" name="name">
+    <br><br>
+    <label for="phone">Phone No.</label>
+    <input type="number" name="phone">
+    <br><br>
+    <label for="email">Email</label>
+    <input type="text" name="email">
+    <br><br>
+    <label for="address">Address</label>
+    <textarea name="address" cols="20" rows="3"></textarea>
+    <br><br>
+    <label for="dob">DOB</label>
+    <input type="date" name="dob">
+    <br><br>
+    <label>Additional Comments:</label><br>
+    <textarea cols="35" rows="12" name="comments" id="para1">
+    
+    </textarea><br>
+    <button name="submit">Submit</button>
+  </form>
 
-          <div class="form-group">
-
-            <div class="form-check-inline">
-
-              <input type="radio" class="form-check-input" name="gender" value="male" <?php echo isset($editData['gender']) && ($editData['gender'] == 'male') ? 'checked' : ''; ?>>Male
-            </div>
-            <div class="form-check-inline">
-              <input type="radio" class="form-check-input" name="gender" value="female" <?php echo isset($editData['gender']) && ($editData['gender'] == 'female') ? 'checked' : ''; ?>>Female
-            </div>
-          </div>
-
-          <div class="form-group">
-            <input type="email" class="form-control" placeholder="Email Address" name="email" value="<?php echo $editData['email'] ?? ''; ?>">
-          </div>
-
-          <div class="form-group">
-            <input type="text" class="form-control" placeholder="Mobile Number" name="mobile" value="<?php echo $editData['mobile'] ?? ''; ?>">
-          </div>
-
-          <div class="form-group">
-
-            <textarea class="form-control" name="address" placeholder="Address">
-         <?php echo $editData['address'] ?? ''; ?>
-       </textarea>
-
-          </div>
-
-          <div class="form-group">
-            <input type="text" class="form-control" placeholder="City" name="city" value="<?php echo $editData['city'] ?? ''; ?>">
-          </div>
-
-          <div class="form-group">
-            <input type="text" class="form-control" placeholder="State" name="state" value="<?php echo $editData['state'] ?? ''; ?>">
-          </div>
-
-          <button type="submit" name="<?php echo empty($editData) ? 'save' : 'update'; ?>" class="btn btn-primary">Save</button>
-        </form>
-        <!--=== HTML Form=== -->
-      </div>
-    </div>
-  </div>
+  <?php
+  echo "<h2>Your Input:</h2>";
+  echo  "Name:" . $name;
+  echo "<br>";
+  echo "Phone No.:" . $phone;
+  echo "<br>";
+  echo  "Email:" . $email;
+  echo "<br>";
+  echo "Address:" . $address;
+  echo "<br>";
+  echo "DOB:" . $dob;
+  echo "<br>"
+  // echo $comments;
+  // echo "<br>;"
+ 
+  ?>
 
 </body>
 
