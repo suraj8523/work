@@ -1,3 +1,41 @@
+<?php 
+
+include "form1_config.php";
+
+  if (isset($_POST['submit'])) {
+
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $mobile = $_POST['mobile'];
+    $course = $_POST['course'];
+    $gender = $_POST['gender'];
+    $hobbies = $_POST['hobbies'];
+    $newvalues =  implode(",", $hobbies);
+    $target_dir = "images/";
+    $target_file = $target_dir . basename($_FILES["image"]["name"]);
+    move_uploaded_file($_FILES["image"]["tmp_name"], $target_file);
+
+    $sql = "INSERT INTO `form_data`(`name`, `email`, `mobile`, `course`, `gender`,`hobbies`,`image`) 
+    VALUES ('$name','$email','$mobile','$course','$gender','$newvalues','$target_file')";
+
+    $result = $conn->query($sql);
+
+    if ($result == TRUE) {
+
+      echo "New record created successfully.";
+
+    }else{
+
+      echo "Error:". $sql . "<br>". $conn->error;
+
+    } 
+
+    $conn->close(); 
+
+  }
+
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -23,7 +61,7 @@
         }
 
         input,
-        select {
+        select ,button{
             border: 1px solid #ccc;
             padding: 5px;
             display: inline-block;
@@ -63,8 +101,7 @@
             font-weight: bold;
         }
 
-        input[type="reset"],
-        button {
+        input[type="reset"] ,button{
             font-size: 110%;
             background: #797c7e;
             margin-top: 10px;
@@ -77,66 +114,10 @@
 </head>
 
 <body>
-    <?php
-    include 'form_connection.php';
-    if (isset($_POST['update'])) {
-        // Taking all 5 values from the form data(input)
-        $id = ($_POST['id']);
-        $name = $_POST['name'];
-        $email = $_POST['email'];
-        $mobile = $_POST['mobile'];
-        $course = $_POST['course'];
-        $gender = $_POST['gender'];
-        $hobbies = $_POST['hobbies'];
-        $newvalues =  implode(",", $hobbies);
-        //********** */ upload image send into the directory*******************
-        $target_dir = "images/";
-        $target_file = $target_dir . basename($_FILES["image"]["name"]);
-        move_uploaded_file($_FILES["image"]["tmp_name"], $target_file);
-
-        $sql = "UPDATE form_details SET 
-            name='$name' ,
-            email='$email', 
-            mobile='$mobile' , 
-            course='$course', 
-            gender='$gender',
-            hobbies='$newvalues', 
-            image='$target_file'   
-            WHERE id='$id'";
-
-        if (mysqli_query($conn, $sql)) {
-            echo " <script> location.replace('form_show.php'); </script>";
-        } else {
-            echo "Error updating record: " . mysqli_error($conn);
-        }
-    }
-
-
-
-
-    if (isset($_GET['id'])) {
-        $id = $_GET['id'];
-        $sql = "SELECT * FROM form_details WHERE id= $id";
-        $result = mysqli_query($conn, $sql);
-        if (mysqli_num_rows($result) > 0) {
-            while ($row = mysqli_fetch_assoc($result)) {
-                $id = $row['id'];
-                $name = $row['name'];
-                $email = $row['email'];
-                $mobile = $row['mobile'];
-                $course  = $row['course'];
-                $gender = $row['gender'];
-                $hobbies = $row['hobbies'];
-                $b=explode(",","$hobbies");
-                $image = $row['image'];
-                
-            }   
-        }
-    }
-    ?>
 
 
     <script>
+
         function printError(elemId, hintMsg) {
             document.getElementById(elemId).innerHTML = hintMsg;
         }
@@ -252,8 +233,8 @@
             }
             // printing the data into txt file
             if ((nameErr || emailErr || mobileErr || courseErr || genderErr || hobbiesErr || imageErr) == true) {
-                return false;
-            };
+                return false;      
+            };        
             // } else {
             //     var dataPreview = "You've entered the following details: \n\n " +
             //         "Full Name: " + name + "\n" +
@@ -273,41 +254,34 @@
             //     URL.revokeObjectURL(link.href);
             // };
         };
+
     </script>
 
 
 
 
-    <form name="contactForm" onsubmit="return validateForm()" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" enctype="multipart/form-data">
+    <form name="contactForm" onsubmit="return validateForm()" method="POST" action=" " enctype="multipart/form-data">
         <h2>Registration Form</h2>
         <div class="row">
-            <label>ID :</label>
-            <input type="text" name="id" value="<?php echo $id; ?>">
-            <div class="error" id="nameErr"></div>
-        </div>
-        <div class="row">
             <label>Full Name:</label>
-            <input type="text" name="name" value="<?php echo $name; ?>">
+            <input type="text" name="name">
             <div class="error" id="nameErr"></div>
         </div>
         <div class="row">
             <label>Email Address:</label>
-            <input type="text" name="email" value="<?php echo $email; ?>">
+            <input type="text" name="email">
             <div class="error" id="emailErr"></div>
         </div>
         <div class="row">
             <label>Mobile Number:</label>
-            <input type="text" name="mobile" maxlength="10" value="<?php echo $mobile; ?>">
+            <input type="text" name="mobile" maxlength="10">
             <div class="error" id="mobileErr"></div>
         </div>
-
-
-        </select>
         <div class="row">
             <label>course:</label>
             <select name="course">
                 <option>Select</option>
-                <option>HTML </option>
+                <option>HTML</option>
                 <option>CSS</option>
                 <option>PYTHON</option>
                 <option>JAVA</option>
@@ -318,68 +292,38 @@
         <div class="row">
             <label>Gender:</label>
             <div class="form-inline">
-                <label><input type="radio" name="gender" value="male" <?php if ($gender == 'Male') {
-                                                                            echo "checked";
-                                                                        } ?>>Male</label>
-                <label><input type="radio" name="gender" value="female" <?php if ($gender == 'Female') {
-                                                                            echo "checked";
-                                                                        } ?>>Female</label>
+                <label><input type="radio" name="gender" value="Male"> Male</label>
+                <label><input type="radio" name="gender" value="Female"> Female</label>
+                <label><input type="radio" name="gender" value="Other">Other </label>
             </div>
             <div class="error" id="genderErr"></div>
         </div>
         <div class="row">
             <label>Hobbies:</label>
             <div class="form-inline">
-                <label><input type="checkbox" name="hobbies[]" value="Travelling" <?php
-                                                                                    if (in_array("Travelling", $b)) {
-                                                                                        echo "checked";
-                                                                                    }
-                                                                                    ?>>Travelling <br></label>
-
-                <label><input type="checkbox" name="hobbies[]" value="Riding" <?php
-                                                                                if (in_array("Riding", $b)) {
-                                                                                    echo "checked";
-                                                                                }
-                                                                                ?>>Riding <br></label>
-                <label><input type="checkbox" name="hobbies[]" value="Gaming" <?php
-                                                                                if (in_array("Gaming", $b)) {
-                                                                                    echo "checked";
-                                                                                }
-                                                                                ?>>Gaming <br></label>
-                <label><input type="checkbox" name="hobbies[]" value="Dancing" <?php
-                                                                                if (in_array("Dancing", $b)) {
-                                                                                    echo "checked";
-                                                                                }
-                                                                                ?>>Dancing <br></label>
-                <label><input type="checkbox" name="hobbies[]" value="Movies" <?php
-                                                                                if (in_array("Movies", $b)) {
-                                                                                    echo "checked";
-                                                                                }
-                                                                                ?>>Movies <br></label>
-
-                <label><input type="checkbox" name="hobbies[]" value="Reading" <?php
-                                                                                if (in_array("Reading", $b)) {
-                                                                                    echo "checked";
-                                                                                }
-                                                                                ?>>Reading <br></label>
+                <label><input type="checkbox" name="hobbies[]" value="Travelling"> Travelling</label>
+                <label><input type="checkbox" name="hobbies[]" value="Riding">Riding</label>
+                <label><input type="checkbox" name="hobbies[]" value="Gaming">Gaming</label>
+                <label><input type="checkbox" name="hobbies[]" value="Dancing">Dancing</label>
+                <label><input type="checkbox" name="hobbies[]" value="Movies">Movies</label>
+                <label><input type="checkbox" name="hobbies[]" value="Reading">Reading</label>
             </div>
             <div class="error" id="hobbiesErr"></div>
         </div>
         <div class="row">
             <label>Image Upload:</label>
-            <input type="file" id="file" name="image" /> <span><?php echo $image; ?>"</span>
+            <input type="file" id="file" name="image"/>
             <div class="error" id="imageErr"></div>
         </div>
 
         <div class="row">
-            <input type="submit" value="UPDATE" name="update">
+            <input type="submit"  name="submit" value="Submit">
             <input type="reset" value="Reset">
-
+      
+            <button><a href="form_view.php">show data</a></button>
         </div>
     </form>
-
-
-
+   
 </body>
 
 </html>

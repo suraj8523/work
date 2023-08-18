@@ -284,6 +284,7 @@
         <div class="row">
             <input type="submit" value="Submit">
             <input type="reset" value="Reset">
+      
             <button><a href="form_show.php">show data</a></button>
         </div>
     </form>

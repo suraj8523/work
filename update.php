@@ -1,55 +1,123 @@
-<!DOCTYPE html>
-<html>
+<?php
 
-<head>
-    <title>update</title>
-</head>
+include "config.php";
 
-<body>
-    <form action="" method="post">
-        <input type="text" name="id" placeholder="id" value="<?php echo $_GET['id']; ?>"><br><br>
-        <input type="text" name="firstname" placeholder="firstname" value="<?php echo $_GET['firstname']; ?>"><br><br>
-        <input type="text" name="lastname" placeholder="lastname" value="<?php echo $_GET['lastname']; ?>"><br><br>
-        <input type="gmail" name="gmail" placeholder="gmail" value="<?php echo $_GET['gmail']; ?>"><br><br>
-        <input type="text" name="number" placeholder="number" value="<?php echo $_GET['number']; ?>"><br><br>
-        <input type="text" name="address" placeholder="address" value="<?php echo $_GET['address']; ?>"><br><br>
-        <input type="submit" name="submit" value="update">
-    </form>
-    <?php
-    include 'connection.php';
-    $firstname = $lastname = $gmail = $number = $address = $id = "";
+if (isset($_POST['update'])) {
 
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $id = ($_REQUEST['id']);
-        $firstname = ($_REQUEST["firstname"]);
-        $lastname = ($_REQUEST["lastname"]);
-        $gmail = ($_REQUEST["gmail"]);
-        $number = ($_REQUEST["number"]);
-        $address = ($_REQUEST["address"]);
-    }
-   
+    $firstname = $_POST['firstname'];
 
+    $user_id = $_POST['user_id'];
 
-    $sql = "UPDATE reg SET firstname='$firstname' , lastname='$lastname', gmail='$gmail' , number='$number', address='$address'   WHERE id='$id'";
+    $lastname = $_POST['lastname'];
 
-    if (mysqli_query($conn, $sql)) {
-        echo "Record updated successfully";
+    $email = $_POST['email'];
+
+    $password = $_POST['password'];
+
+    $gender = $_POST['gender'];
+
+    $sql = "UPDATE `users` SET `firstname`='$firstname',`lastname`='$lastname',`email`='$email',`password`='$password',`gender`='$gender' WHERE `id`='$user_id'";
+
+    $result = $conn->query($sql);
+
+    if ($result == TRUE) {
+
+        echo "Record updated successfully.";
     } else {
-        echo "Error updating record: " . mysqli_error($conn);
+
+        echo "Error:" . $sql . "<br>" . $conn->error;
     }
+}
 
-    echo nl2br("
-	<h3>You've entered the following details: </h3> 
-    <b> Id  : </b> \t $id \n
-	<b>Name  :</b>  \t $firstname \n
-	<b>Email  :</b>\t $lastname \n
-	<b>Mobile  :</b>\t $gmail\n 
-	<b>Course  :</b>\t $number \n
-	<b>Gender  :</b>\t $address \n
+if (isset($_GET['id'])) {
 
-");
+    $user_id = $_GET['id'];
 
-    ?>
-</body>
+    $sql = "SELECT * FROM `users` WHERE `id`='$user_id'";
 
-</html>
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+
+        while ($row = $result->fetch_assoc()) {
+
+            $first_name = $row['firstname'];
+
+            $lastname = $row['lastname'];
+
+            $email = $row['email'];
+
+            $password  = $row['password'];
+
+            $gender = $row['gender'];
+
+            $id = $row['id'];
+        }
+
+?>
+
+        <h2>User Update Form</h2>
+
+        <form action="" method="post">
+
+            <fieldset>
+
+                <legend>Personal information:</legend>
+
+                First name:<br>
+
+                <input type="text" name="firstname" value="<?php echo $first_name; ?>">
+
+                <input type="hidden" name="user_id" value="<?php echo $id; ?>">
+
+                <br>
+
+                Last name:<br>
+
+                <input type="text" name="lastname" value="<?php echo $lastname; ?>">
+
+                <br>
+
+                Email:<br>
+
+                <input type="email" name="email" value="<?php echo $email; ?>">
+
+                <br>
+
+                Password:<br>
+
+                <input type="password" name="password" value="<?php echo $password; ?>">
+
+                <br>
+
+                Gender:<br>
+
+                <input type="radio" name="gender" value="Male" <?php if ($gender == 'Male') {
+                                                                    echo "checked";
+                                                                } ?>>Male
+
+                <input type="radio" name="gender" value="Female" <?php if ($gender == 'Female') {
+                                                                        echo "checked";
+                                                                    } ?>>Female
+
+                <br><br>
+
+                <input type="submit" value="Update" name="update">
+
+            </fieldset>
+
+        </form>
+
+        </body>
+
+        </html>
+
+<?php
+
+    } else {
+
+        header('Location: view.php');
+    }
+}
+
+?>
