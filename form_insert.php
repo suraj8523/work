@@ -130,7 +130,7 @@ if (mysqli_query($conn, $sql)) {
 //   while($row = mysqli_fetch_assoc($result)) {
 //     //echo "id: " . $row["id"]. " - Name: " . $row["name"]. " Hobbies -" . $row["hobbies"]. "<br>";
 //     //echo "id:" . $row["id"] . "-Name --:" . $row["name"] . "Email--:" . $row["email"] . "Mobile" . $row["mobile"] . "Course" . $row["course"] . "Gender" . $row["gender"] . "Hobbies" . $row["hobbies"] . "Image" . $row["image"] . "<br>";
-  
+
 //     echo nl2br("
 //     <h3>You've entered the following details: </h3> 
 //     <b>Id  : </b> \t $row[id] \t
@@ -142,8 +142,8 @@ if (mysqli_query($conn, $sql)) {
 //     <b>Hobbies  :</b>\t $row[hobbies] \t
 //     <b>Image  :</b>\t $row[image] \t
 //   ");
-  
-  
+
+
 //   }
 // } else {
 //   echo "0 results";

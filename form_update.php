@@ -93,11 +93,11 @@
         $target_dir = "images/";
         $target_file = $target_dir . basename($_FILES["image"]["name"]);
         move_uploaded_file($_FILES["image"]["tmp_name"], $target_file);
-
+        //******************************update the data into admin *******************************
         $sql = "UPDATE form_details SET 
             name='$name' ,
             email='$email', 
-            mobile='$mobile' , 
+            mobile='$mobile', 
             course='$course', 
             gender='$gender',
             hobbies='$newvalues', 
@@ -110,10 +110,7 @@
             echo "Error updating record: " . mysqli_error($conn);
         }
     }
-
-
-
-
+    //********************************getting the data by id **********************
     if (isset($_GET['id'])) {
         $id = $_GET['id'];
         $sql = "SELECT * FROM form_details WHERE id= $id";
@@ -127,12 +124,12 @@
                 $course  = $row['course'];
                 $gender = $row['gender'];
                 $hobbies = $row['hobbies'];
-                $b=explode(",","$hobbies");
+                $b = explode(",", "$hobbies");
                 $image = $row['image'];
-                
-            }   
+            }
         }
     }
+
     ?>
 
 
@@ -301,27 +298,44 @@
             <div class="error" id="mobileErr"></div>
         </div>
 
-
-        </select>
         <div class="row">
             <label>course:</label>
-            <select name="course">
+            <select name="course" id="course">
                 <option>Select</option>
-                <option>HTML </option>
-                <option>CSS</option>
-                <option>PYTHON</option>
-                <option>JAVA</option>
-                <option>JAVASCRIPT</option>
+                <option value="html" <?php
+                                        if ($course == 'html') {
+                                            echo "selected";
+                                        }
+                                        ?>>HTML </option>
+                <option value="css" <?php
+                                    if ($course == 'css') {
+                                        echo "selected";
+                                    } ?>>CSS</option>
+                <option value="python" <?php
+                                        if ($course == 'python') {
+                                            echo "selected";
+                                        }
+                                        ?>>PYTHON</option>
+                <option value="java" <?php
+                                        if ($course == 'java') {
+                                            echo "selected";
+                                        }
+                                        ?>>JAVA</option>
+                <option value="javascript" <?php
+                                            if ($course == 'javascript') {
+                                                echo "selected";
+                                            }
+                                            ?>>JAVASCRIPT</option>
             </select>
             <div class="error" id="courseErr"></div>
         </div>
         <div class="row">
             <label>Gender:</label>
             <div class="form-inline">
-                <label><input type="radio" name="gender" value="male" <?php if ($gender == 'Male') {
+                <label><input type="radio" name="gender" value="male" <?php if ($gender == 'male') {
                                                                             echo "checked";
                                                                         } ?>>Male</label>
-                <label><input type="radio" name="gender" value="female" <?php if ($gender == 'Female') {
+                <label><input type="radio" name="gender" value="female" <?php if ($gender == 'female') {
                                                                             echo "checked";
                                                                         } ?>>Female</label>
             </div>

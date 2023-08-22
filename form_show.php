@@ -11,13 +11,19 @@ $result = mysqli_query($conn, $sql);
 
 <head>
     <title>Show data</title>
-
 </head>
 
 <body>
+    <div align="right">
+        <button><a href="form_index.php"> ADD USER</a></button>
+        <button><a href="form_down_csv.php">CSV FILE</a></button>
+        <button><a href="form_down_excel.php"> EXCEL FILE </a></button>
+        <button><a href="form_down_pdf.php"> PDF FILE </a></button>
 
+
+    </div>
     <div>
-        <h2>users</h2>
+        <h2>Student Details :</h2>
         <table border="2">
             <thead>
                 <tr>
@@ -50,8 +56,8 @@ $result = mysqli_query($conn, $sql);
                             <td><?php echo $row['gender']; ?></td>
                             <td><?php echo $row['hobbies']; ?></td>
                             <td><?php echo $row['image']; ?></td>
-                            <td><a  href="form_update.php?id=<?php echo $row['id']; ?>">Edit</a>&nbsp;</td>
-                            <td><a  href="form_delete.php?id=<?php echo $row['id']; ?>">Delete</a></td>
+                            <td><a href="form_update.php?id=<?php echo $row['id']; ?>">Edit</a>&nbsp;</td>
+                            <td><a href="form_delete.php?id=<?php echo $row['id']; ?>">Delete</a></td>
 
                         </tr>
 
@@ -62,6 +68,14 @@ $result = mysqli_query($conn, $sql);
 
             </tbody>
         </table>
+        <!-- <form action="form_check.php" method="post">
+        <div class="row">
+            <label>ID :</label>
+            <input type="text" name="id">
+            <button name="search"> Search </button>
+        </div>
+    </form> -->
     </div>
 </body>
+
 </html>
