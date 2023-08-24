@@ -23,7 +23,8 @@
         }
 
         input,
-        select {
+        select,
+        button {
             border: 1px solid #ccc;
             padding: 5px;
             display: inline-block;
@@ -63,7 +64,8 @@
             font-weight: bold;
         }
 
-        input[type="reset"] {
+        input[type="reset"],
+        button {
             font-size: 110%;
             background: #797c7e;
             margin-top: 10px;
@@ -77,7 +79,6 @@
 
 <body>
     <script>
-
         function printError(elemId, hintMsg) {
             document.getElementById(elemId).innerHTML = hintMsg;
         }
@@ -193,8 +194,8 @@
             }
             // printing the data into txt file
             if ((nameErr || emailErr || mobileErr || courseErr || genderErr || hobbiesErr || imageErr) == true) {
-                return false;      
-            };        
+                return false;
+            };
             // } else {
             //     var dataPreview = "You've entered the following details: \n\n " +
             //         "Full Name: " + name + "\n" +
@@ -214,9 +215,8 @@
             //     URL.revokeObjectURL(link.href);
             // };
         };
-
     </script>
-    <form name="contactForm" onsubmit="return validateForm()" method="POST" action="action.php" enctype="multipart/form-data">
+    <form name="contactForm" onsubmit="return validateForm()">
         <h2>Registration Form</h2>
         <div class="row">
             <label>Full Name:</label>
@@ -237,20 +237,20 @@
             <label>course:</label>
             <select name="course">
                 <option>Select</option>
-                <option>HTML</option>
-                <option>CSS</option>
-                <option>PYTHON</option>
-                <option>JAVA</option>
-                <option>JAVASCRIPT</option>
+                <option value="html">HTML</option>
+                <option value="css">CSS</option>
+                <option value="python">PYTHON</option>
+                <option value="java">JAVA</option>
+                <option value="javascript">JAVASCRIPT</option>
             </select>
             <div class="error" id="courseErr"></div>
         </div>
         <div class="row">
             <label>Gender:</label>
             <div class="form-inline">
-                <label><input type="radio" name="gender" value="Male"> Male</label>
-                <label><input type="radio" name="gender" value="Female"> Female</label>
-                <label><input type="radio" name="gender" value="Other">Other </label>
+                <label><input type="radio" name="gender" value="male"> Male</label>
+                <label><input type="radio" name="gender" value="female"> Female</label>
+
             </div>
             <div class="error" id="genderErr"></div>
         </div>
@@ -275,9 +275,12 @@
         <div class="row">
             <input type="submit" value="Submit">
             <input type="reset" value="Reset">
+
         </div>
     </form>
-   
+
+
+
 </body>
 
 </html>
