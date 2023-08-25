@@ -1,43 +1,32 @@
 <?php
-$name = $email = $mobile = $course = $gender = $hobbies = $image = "";
+include 'connection.php';
+$firstname = $lastname = $gmail = $number = $address = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $image = (isset($_REQUEST["image"]));
-    $name = ($_REQUEST["name"]);
-    $email = ($_REQUEST["email"]);
-    $mobile = ($_REQUEST["mobile"]);
-    $course = ($_REQUEST["course"]);
-    $gender = ($_REQUEST["gender"]);
-    $hobbies = (isset($_REQUEST['hobbies'])) ? $_REQUEST['hobbies'] : array();
+    
+    $firstname = ($_REQUEST["firstname"]);
+    $lastname = ($_REQUEST["lastname"]);
+    $gmail = ($_REQUEST["gmail"]);
+    $number = ($_REQUEST["number"]);
+    $address = ($_REQUEST["address"]);
 
-    // image path name and folder save details 
-    $filename = $_FILES['image']["name"];
-    $tempname = $_FILES["image"]["tmp_name"];
-    $folder = "uploads/" . $filename;
-    move_uploaded_file($tempname, $folder);
 }
 
-echo "<h2>You've entered the following details: </h2>";
-echo  " <b>Name :</b> " . $name;
-echo "<br>";
-echo "<br>";
-echo  " <b> Email :</b> " . $email;
-echo "<br>";
-echo "<br>";
-echo  "<b> Mobile :</b>" . $mobile;
-echo "<br>";
-echo "<br>";
-echo " <b> Course :</b> " . $course;
-echo "<br>";
-echo "<br>";
-echo  " <b> Gender : </b>" . $gender;
-echo "<br>";
-echo "<br>";
-echo " <b> Image Upload :</b> " . $folder;
-?>
-<p><strong>Hobbies :</strong>
-    <?php
-    foreach ($hobbies as $hobby) {
-        echo '<li>' . $hobby . '</li>';
-    }
-    ?>
+$sql = "INSERT INTO reg (firstname, lastname , gmail , number , address  )
+    VALUES ('$firstname','$lastname','$gmail','$number','$address')";
+
+if (mysqli_query($conn, $sql)) {
+  echo "successfully data inserted into database";
+} else {
+  echo "ERROR: Hush! Sorry $sql. "
+    . mysqli_error($conn);
+}
+// echo nl2br("
+// 	<h3>You've entered the following details: </h3> 
+// 	<b>Name  :</b>  \t $firstname \n
+// 	<b>Email  :</b>\t $lastname \n
+// 	<b>Mobile  :</b>\t $gmail\n 
+// 	<b>Course  :</b>\t $number \n
+// 	<b>Gender  :</b>\t $address \n
+
+// ");

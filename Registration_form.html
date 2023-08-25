@@ -194,25 +194,25 @@
             // printing the data into txt file
             if ((nameErr || emailErr || mobileErr || courseErr || genderErr || hobbiesErr || imageErr) == true) {
                 return false;
-            };
-            // } else {
-            //     var dataPreview = "You've entered the following details: \n\n " +
-            //         "Full Name: " + name + "\n" +
-            //         "Email Address: " + email + "\n" +
-            //         "Mobile Number: " + mobile + "\n" +
-            //         "Hobbies : " + hobbies + "\n" +
-            //         "course: " + course + "\n" +
-            //         "Gender: " + gender + "\n" +
-            //         "Image Path:" + filePath + "\n";
+            
+            } else {
+                var dataPreview = "You've entered the following details: \n\n " +
+                    "Full Name: " + name + "\n" +
+                    "Email Address: " + email + "\n" +
+                    "Mobile Number: " + mobile + "\n" +
+                    "Hobbies : " + hobbies + "\n" +
+                    "course: " + course + "\n" +
+                    "Gender: " + gender + "\n" +
+                    "Image Path:" + filePath + "\n";
 
-            //     // download the file in txt mode 
-            //     const link = document.createElement("a");
-            //     const file = new Blob([dataPreview], { type: 'text/plain' });
-            //     link.href = URL.createObjectURL(file);
-            //     link.download = "Registration_details.txt";
-            //     link.click();
-            //     URL.revokeObjectURL(link.href);
-            // };
+                // download the file in txt mode 
+                const link = document.createElement("a");
+                const file = new Blob([dataPreview], { type: 'text/plain' });
+                link.href = URL.createObjectURL(file);
+                link.download = "Registration_details.txt";
+                link.click();
+                URL.revokeObjectURL(link.href);
+            };
         };
 
     </script>
